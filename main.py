@@ -1,86 +1,25 @@
-print("Emeklilik Hesaplama Programı:")
-from datetime import date
+print("*-Bilet Sistemi-*")
+Seçim=str(input("Sinema veya Tiyatro seçimini yapınız :"))
 
-def yil_hesapla(tarih):
-    bugun = date.today()
-    return bugun.year - tarih.year - ((bugun.month, bugun.day) < (tarih.month, tarih.day))
-
-def emeklilik_hesapla(isim, dogum_tarihi, sigorta_baslangic_tarihi, gun):
-    yas = yil_hesapla(dogum_tarihi)
-    sigortalilik_suresi = yil_hesapla(sigorta_baslangic_tarihi)
-    if gun < 9000:
-        kalan_gun1 = 9000 - gun
-        return "{}, Emekli olamazsınız. Gününüz dolmamıştır. Emekliliğe {} gün kalmıştır.".format(isim, kalan_gun1)
-    elif yas >= 15 and gun >= 10000:
-        return "{}, EYT ile Emeklisiniz.".format(isim)
-    elif yas >= 20 and gun >= 9000:
-        return "{}, Yaşınız ve Gününüz dolmuştur. Emekli olabilirsiniz.".format(isim)
-    else:
-        kalan_gun2 = (15 - sigortalilik_suresi) * 365 + (10000 - gun)
-        return "{}, EYT'ye takılı kaldınız. Gün sayısınız az .Emekliliğe {} gün kalmıştır.".format(isim, kalan_gun2)
-
-isim = input("Lütfen İsminizi Girin: ")
-
-hitap = input("Lütfen Hitap Şeklinizi Girin (Bey/Hanım): ")
-
-dogum_ay_adi = input("Lütfen Doğduğunuz Ayın Adını Girin (Ocak, Şubat, ...): ")
-
-dogum_yili = int(input("Lütfen Doğum Yılınızı Girin: "))
-
-dogum_gunu = int(input("Lütfen Doğum Gününüzü Girin: "))
-
-def ay_no(ad):
- aylar = {
-    "Ocak": 1,
-    "Şubat": 2,
-    "Mart": 3,
-    "Nisan": 4,
-    "Mayıs": 5,
-    "Haziran": 6,
-    "Temmuz": 7,
-    "Ağustos": 8,
-    "Eylül": 9,
-    "Ekim": 10,
-    "Kasım": 11,
-    "Aralık": 12
-}
- if ad in aylar:
-     return aylar[ad]
- else:
-     print("Hata: Geçersiz ay adı.")
+Kişi=str(input("Kaç kişiniz? :"))
+Öğrenci=str(input("Öğrenci misiniz? :"))
+fiyat=0
 
 
-sigorta_baslangic_ayi=ay_no(input("Lütfen Giriş Yaptığınız Ayın Adını Girin(Ocak,Şubat ...):"))
-
-sigorta_baslangic_yili=int(input("Lütfen Sigorta Başlangıç Yılınızı Girin:"))
-def gunler(sayi):
-    gunler={
-        "Pazartesi":1,
-        "Salı":2,
-        "Çarşamba":3,
-        "Perşembe":4,
-        "Cuma":5,
-        "Cumartesi":6,
-        "Pazar":7,
-    }
-    if sayi in gunler:
-        return gunler[sayi]
-    else:
-        print("Hata: Geçersiz gün adı.")
+#halk
+if Seçim =='Tiyatro' or Seçim=='tiyatro' or Seçim=='TİYATRO':
+    fiyat=30#tiyatro
+elif Seçim =='Sinema' or Seçim=='sinema'or Seçim=='SİNEMA':
+    fiyat=20#sinema
+elif Seçim=='Tiyatro ve Sinema' or Seçim=='sinema ve tiyatro' or Seçim=='Sinema ve Tiyatro' or Seçim=='tiyatro ve sinema' or Seçim=='Tiyatro ve Sinema' or Seçim=='TİYATRO VE SİNEMA' or Seçim=='SİNEMA VE TİYATRO':
+    fiyat=50 #sinema ve tiyatro""""""""""""""""""""""""""""""
 
 
-sigorta_baslangic_gunu = gunler(str(input("Lütfen Sigorta Başlangıç Gününüzü Girin:")))
+fiyat *=int (Kişi)
 
-gun=int(input("Lütfen Toplam Prim Gün Sayısını Girin:"))
-
-dogum_ayi = ay_no(dogum_ay_adi)
-print("Doğum ayı:", dogum_ayi)
-sigorta_baslangic_ayi = ay_no(sigorta_baslangic_ayi)
-print("Sigorta başlangıç ayı:", sigorta_baslangic_ayi)
-
-dogum_tarihi = date(dogum_yili, dogum_ayi, dogum_gunu)
-sigorta_baslangic_tarihi = date(sigorta_baslangic_yili, sigorta_baslangic_ayi, sigorta_baslangic_gunu)
-sonuc = emeklilik_hesapla(isim + " " + hitap,dogum_tarihi,sigorta_baslangic_tarihi,gun)
-
-print(sonuc)
-
+#öğrenci indirimi
+if Öğrenci== 'Evet' or Öğrenci=='evet' :
+ fiyat=fiyat/2 #Yarı Fiyat
+ print("--Vermeniz Gereken Ücret--:", fiyat)
+else:
+    print("--Vermeniz Gereken Ücret--:",fiyat,"Tl")
